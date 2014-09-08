@@ -37,7 +37,7 @@ if(typeof stylepath != 'undefined' && typeof skin != 'undefined') {
     }
 }
 // Un-trap us from framesets
-if( window.top != window ) window.top.location = window.location;
+// if( window.top != window ) window.top.location = window.location;
 
 // for enhanced RecentChanges
 function toggleVisibility( _levelId, _otherId, _linkId) {
