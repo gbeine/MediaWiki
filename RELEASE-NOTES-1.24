@@ -253,6 +253,9 @@ production.
   of fetching tokens are deprecated. The value needed for meta=tokens's 'type'
   parameter for each module is documented in the action=help output and is
   returned from action=paraminfo.
+* New action ClearHasMsg that can be used to clear HasMsg flag.
+* The cmstartsortkey and cmendsortkey parameters to list=categorymembers are
+  deprecated in favor of cmstarthexsortkey and cmendhexsortkey.
 
 === Action API internal changes in 1.24 ===
 * Methods for handling continuation are added to ApiResult, so actions other
@@ -429,8 +432,8 @@ changes to languages because of Bugzilla reports.
   setPreloadedText() from EditPage.php. (deprecated since 1.21)
 * Removed global functions wfArrayLookup(), wfArrayMerge(), wfDebugDieBacktrace()
   and wfTime(). (deprecated since 1.22)
-* Browser support for Internet Explorer 6 lowered from Grade A to Grade C,
-  meaning that JavaScript is no longer executed in this browser.
+* Browser support for Internet Explorer 6 and 7 lowered from Grade A to Grade C,
+  meaning that JavaScript is no longer executed in these browser versions.
 * Browser support for Opera 11 lowered from Grade A to Grade C.
 * Removed IEFixes module which existed purely to provide support for MSIE versions
   below 7 (conditionally loaded only for those browsers).
@@ -448,10 +451,16 @@ changes to languages because of Bugzilla reports.
   called unconditionally.
 * TablePager::getBody() is now 'final' and can't be overridden in subclasses.
 * TablePager::getBody() is deprecated, use getBodyOutput() or getFullOutput().
-* log_page for move log entries store the original page ID, rather than that 
+* Added $outputPage parameter to the SkinTemplateGetLanguageLink hook.
+* log_page for move log entries store the original page ID, rather than that
   of the new redirect page. This is not retroactive.
-* LCStoreAccel was removed. $wgLocalisationCacheConf can no longer be set to 
+* LCStoreAccel was removed. $wgLocalisationCacheConf can no longer be set to
   use this store class.
+* Html::infoBox() no longer accepts paths relative to skins/common/images/.
+* Deprecated defunct Skin::getCommonStylePath().
+* Some extensions had their ResourceLoader modules depend on the "mediawiki"
+  and "jquery" modules. In the past, this behavior was undefined, now it will
+  throw an error.
 
 ==== Renamed classes ====
 * CLDRPluralRuleConverter_Expression to CLDRPluralRuleConverterExpression

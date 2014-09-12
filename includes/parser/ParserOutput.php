@@ -50,13 +50,13 @@ class ParserOutput extends CacheTime {
 		$mTOCHTML = '',               # HTML of the TOC
 		$mTimestamp,                  # Timestamp of the revision
 		$mTOCEnabled = true;          # Whether TOC should be shown, can't override __NOTOC__
-		private $mIndexPolicy = '';       # 'index' or 'noindex'?  Any other value will result in no change.
-		private $mAccessedOptions = array(); # List of ParserOptions (stored in the keys)
-		private $mSecondaryDataUpdates = array(); # List of DataUpdate, used to save info from the page somewhere else.
-		private $mExtensionData = array(); # extra data used by extensions
-		private $mLimitReportData = array(); # Parser limit report data
-		private $mParseStartTime = array(); # Timestamps for getTimeSinceStart()
-		private $mPreventClickjacking = false; # Whether to emit X-Frame-Options: DENY
+	private $mIndexPolicy = '';       # 'index' or 'noindex'?  Any other value will result in no change.
+	private $mAccessedOptions = array(); # List of ParserOptions (stored in the keys)
+	private $mSecondaryDataUpdates = array(); # List of DataUpdate, used to save info from the page somewhere else.
+	private $mExtensionData = array(); # extra data used by extensions
+	private $mLimitReportData = array(); # Parser limit report data
+	private $mParseStartTime = array(); # Timestamps for getTimeSinceStart()
+	private $mPreventClickjacking = false; # Whether to emit X-Frame-Options: DENY
 
 	const EDITSECTION_REGEX =
 		'#<(?:mw:)?editsection page="(.*?)" section="(.*?)"(?:/>|>(.*?)(</(?:mw:)?editsection>))#';
@@ -733,10 +733,12 @@ class ParserOutput extends CacheTime {
 		if ( !$clock || $clock === 'wall' ) {
 			$ret['wall'] = microtime( true );
 		}
-		if ( ( !$clock || $clock === 'cpu' ) && function_exists( 'getrusage' ) ) {
-			$ru = getrusage();
-			$ret['cpu'] = $ru['ru_utime.tv_sec'] + $ru['ru_utime.tv_usec'] / 1e6;
-			$ret['cpu'] += $ru['ru_stime.tv_sec'] + $ru['ru_stime.tv_usec'] / 1e6;
+		if ( !$clock || $clock === 'cpu' ) {
+			$ru = wfGetRusage();
+			if ( $ru ) {
+				$ret['cpu'] = $ru['ru_utime.tv_sec'] + $ru['ru_utime.tv_usec'] / 1e6;
+				$ret['cpu'] += $ru['ru_stime.tv_sec'] + $ru['ru_stime.tv_usec'] / 1e6;
+			}
 		}
 		return $ret;
 	}

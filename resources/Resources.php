@@ -1313,7 +1313,6 @@ return array(
 		'scripts' => 'resources/src/mediawiki.special/mediawiki.special.undelete.js',
 	),
 	'mediawiki.special.upload' => array(
-		// @todo merge in remainder of mediawiki.legacy.upload
 		'scripts' => 'resources/src/mediawiki.special/mediawiki.special.upload.js',
 		'messages' => array(
 			'widthheight',
@@ -1324,7 +1323,10 @@ return array(
 			'largefileserver',
 		),
 		'dependencies' => array(
+			'jquery.spinner',
+			'mediawiki.api',
 			'mediawiki.libs.jpegmeta',
+			'mediawiki.Title',
 			'mediawiki.util',
 		),
 	),
@@ -1423,7 +1425,9 @@ return array(
 		'position' => 'top',
 	),
 	'mediawiki.legacy.commonPrint' => array(
-		'styles' => array( 'resources/src/mediawiki.legacy/commonPrint.css' => array( 'media' => 'print' ) ),
+		'styles' => array(
+			'resources/src/mediawiki.legacy/commonPrint.css' => array( 'media' => 'print' )
+		),
 	),
 	'mediawiki.legacy.protect' => array(
 		'scripts' => 'resources/src/mediawiki.legacy/protect.js',
@@ -1434,18 +1438,13 @@ return array(
 	),
 	'mediawiki.legacy.shared' => array(
 		// Used in the web installer. Test it after modifying this definition!
-		'styles' => array( 'resources/src/mediawiki.legacy/shared.css' => array( 'media' => 'screen' ) ),
+		'styles' => array(
+			'resources/src/mediawiki.legacy/shared.css' => array( 'media' => 'screen' )
+		),
 	),
 	'mediawiki.legacy.oldshared' => array(
-		'styles' => array( 'resources/src/mediawiki.legacy/oldshared.css' => array( 'media' => 'screen' ) ),
-	),
-	'mediawiki.legacy.upload' => array(
-		'scripts' => 'resources/src/mediawiki.legacy/upload.js',
-		'dependencies' => array(
-			'jquery.spinner',
-			'mediawiki.api',
-			'mediawiki.Title',
-			'mediawiki.util',
+		'styles' => array(
+			'resources/src/mediawiki.legacy/oldshared.css' => array( 'media' => 'screen' )
 		),
 	),
 	'mediawiki.legacy.wikibits' => array(
